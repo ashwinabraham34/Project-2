@@ -9,16 +9,16 @@ import pandas as pd
 
 
 from sqlalchemy import create_engine
-engine = create_engine('postgresql://postgres:KRISS34GUN@localhost:5432/BC_database')
+engine = create_engine('postgresql://postgres:KRISS34GUN@localhost:5432/OAB_database')
 connection = engine.connect()
 
-df = pd.read_sql_query('SELECT * FROM public."BC"',con=engine)
+df = pd.read_sql_query('SELECT * FROM public."OAB"',con=engine)
 
 app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def html_table():
-    return render_template('data.html',  tables=[df.to_html(classes='data')], titles=df.columns.values)
+    return render_template('index.html',  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route('/data', methods=["GET"])
 def send_data():
