@@ -26,13 +26,13 @@ var chartGroup = svg.append("g")
 
   // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
   var xBandScale = d3.scaleBand()
-    .domain(tvData.map(d => d.name))
+    .domain(data.map(d => d.name))
     .range([0, chartWidth])
     .padding(0.15);
 
   // Create a linear scale for the vertical axis.
   var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(tvData, d => d.hours)])
+    .domain([0, d3.max(data, d => d.hours)])
     .range([chartHeight, 0]);
 
   // Create two new functions passing our scales in as arguments
@@ -52,7 +52,7 @@ var chartGroup = svg.append("g")
   // Create one SVG rectangle per piece of tvData
   // Use the linear and band scales to position each rectangle within the chart
   chartGroup.selectAll(".bar")
-    .data(tvData)
+    .data(data)
     .enter()
     .append("rect")
     .attr("class", "bar")
